@@ -1,0 +1,69 @@
+﻿@using Car_Sale_Web_Site.Models
+@model  Car_Sale_Web_Site.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Account info";
+}
+
+<h2>Account details</h2>
+
+    @Html.AntiForgeryToken()
+
+    <br />
+    <table class="table">
+        <tr>
+            <th style="text-align:center">
+                Full name
+            </th>
+            <th style="text-align:center">
+                User name
+            </th>
+            <th style="text-align:center">
+                Phone number
+            </th>
+            <th style="text-align:center">
+                Email adress
+            </th>
+            <th style="text-align:center">
+                Role
+            </th>
+            <th style="text-align:center">
+                Number of posts
+            </th>
+            <th style="text-align:center">
+                Date of registration
+            </th>
+            <th style="text-align:center">
+                Functions
+            </th>
+        </tr>
+
+
+        <tr>
+            <td style="padding-top:25px">
+                @Html.DisplayFor(modelItem => Model.FullName)
+            </td>
+            <td style="padding-top:25px;">
+                @Html.DisplayFor(modelItem => Model.UserName)
+            </td>
+            <td style="padding-top:25px;">
+                @Html.DisplayFor(modelItem => Model.PhoneNumber)
+            </td>
+            <td style="padding-top:25px;">
+                @Html.DisplayFor(modelItem => Model.Email)
+            </td>
+            <td style="padding-top:25px;">
+                @Html.DisplayFor(modelItem => Model.role)
+            </td>
+            <td style="padding-top:25px;">
+                @Html.DisplayFor(modelItem => Model.postsNumber)
+            </td>
+            <td style="padding-top:25px;">
+                @Html.DisplayFor(modelItem => Model.dateOfRegistration)
+            </td>
+            <td style="padding-top:25px">
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
+            </td>
+        </tr>
+    </table>

@@ -1,0 +1,102 @@
+﻿@using System.Text.RegularExpressions
+@using Car_Sale_Web_Site.Classes
+@model IEnumerable<Car_Sale_Web_Site.Models.Message>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Messages</h2>
+
+<p>
+    @Html.ActionLink("Send Message", "Create")
+</p>
+<table class="table" id="hoverEffects">
+    <tr>
+        <th>
+            Status
+        </th>
+
+        <th>
+            From
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            Message
+        </th>
+        <th>
+            Received
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        if (DateTime.Compare(item.ReadDate, new DateTime(2001, 1, 1)) < 0)
+        {
+            <tr style="font-weight: 700; background-color: lightcyan" onclick="location.href='@Url.Action("Details", "Messages", new {id = item.MessageId})'">
+                <td style="color: red">
+                    NEW
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorMsgUserName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Utils.CutText(item.MyMessage, 70)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MessageId })
+                </td>
+            </tr>
+        }
+        else
+        {
+            <tr onclick="location.href='@Url.Action("Details", "Messages", new {id = item.MessageId})'">
+                <td>
+                    -
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorMsgUserName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Utils.CutText(item.MyMessage, 70)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MessageId })
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+@if (Model.LongCount() == 0)
+{
+    <br>
+    <div>
+        <h3 style="color:red; margin-left:350px"> You don't have any messages at the moment.</h3>
+    </div>
+    <br>
+}
